@@ -157,7 +157,8 @@ if predict:
         st.markdown(f"""
         <div class='result-box'>
             <p style='font-size:14px; opacity:0.8;'>ESTIMATED MARKET PRICE</p>
-            <h2 style='font-size:40px;'>₹ {price:,.2f}</h2>
+            <h2 style='font-size:40px;'>{format_inr(price)}</h2>
+
         </div>
         """, unsafe_allow_html=True)
 
@@ -169,3 +170,4 @@ if predict:
 st.markdown("<p class='footer-text'>Optimized for Mobile & Desktop View</p>", unsafe_allow_html=True)
 
 st.markdown("</div>", unsafe_allow_html=True)
+
