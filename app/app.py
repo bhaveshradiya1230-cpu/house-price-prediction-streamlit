@@ -3,7 +3,7 @@ import numpy as np
 import pickle
 
 # -----------------------------
-# 1. Page Configuration
+# PAGE CONFIG
 # -----------------------------
 st.set_page_config(
     page_title="House Price Prediction",
@@ -12,44 +12,50 @@ st.set_page_config(
 )
 
 # -----------------------------
-# 2. PROFESSIONAL DARK UI + BORDERS CSS
+# ADVANCED PROFESSIONAL CSS
 # -----------------------------
 st.markdown("""
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap');
 
 .stApp {
-    background-color: #0b0f19 !important;
+    background-color: #0b0f19;
     font-family: 'Plus Jakarta Sans', sans-serif;
 }
 
-/* Hide Streamlit default UI */
+/* Hide Streamlit UI */
 header, footer, .stDeployButton {display: none !important;}
 
-/* MAIN APP BORDER */
+/* ===========================
+   MAIN APP GLOWING BORDER
+=========================== */
 .main-container {
     border: 2px solid #22d3ee;
-    border-radius: 18px;
+    border-radius: 20px;
     padding: 35px 30px;
-    box-shadow: 0 0 30px rgba(34, 211, 238, 0.3);
-    background: linear-gradient(180deg, #0b1220, #020617);
     max-width: 900px;
     margin: auto;
+    background: linear-gradient(180deg, #0b1220, #020617);
+    box-shadow:
+        0 0 20px rgba(34,211,238,0.25),
+        inset 0 0 15px rgba(34,211,238,0.05);
 }
 
-/* INPUT CARD */
+/* ===========================
+   INPUT CARD BORDER
+=========================== */
 .input-card {
     border: 2px solid #22d3ee;
     background-color: #111827;
     padding: 25px;
-    border-radius: 14px;
-    box-shadow: 0 0 20px rgba(34, 211, 238, 0.25);
-    margin-top: 20px;
+    border-radius: 15px;
+    box-shadow: 0 0 25px rgba(34,211,238,0.3);
+    margin-top: 25px;
 }
 
 /* HEADINGS */
 h1, h2, p {
-    color: white !important;
+    color: #ffffff !important;
     text-align: center;
 }
 
@@ -63,32 +69,43 @@ label p {
 /* BUTTON */
 div.stButton > button {
     width: 100%;
-    background: linear-gradient(90deg, #0891b2, #0e7490) !important;
-    color: white !important;
-    border: 1px solid #22d3ee !important;
-    height: 50px;
+    height: 52px;
     font-size: 18px;
     font-weight: 700;
-    border-radius: 10px;
-    margin-top: 15px;
+    border-radius: 12px;
+    border: 1px solid #22d3ee;
+    background: linear-gradient(90deg, #0891b2, #0e7490);
+    color: white;
     transition: 0.3s;
 }
 
 div.stButton > button:hover {
-    background: #22d3ee !important;
-    color: #0b0f19 !important;
-    box-shadow: 0 0 15px #22d3ee;
+    background: #22d3ee;
+    color: #020617;
+    box-shadow: 0 0 20px #22d3ee;
 }
 
-/* RESULT BOX */
+/* ===========================
+   RESULT PRICE GLOW
+=========================== */
 .result-box {
     background: #064e3b;
     border: 2px solid #10b981;
-    padding: 22px;
-    border-radius: 14px;
+    padding: 25px;
+    border-radius: 15px;
+    margin-top: 30px;
     text-align: center;
-    margin-top: 25px;
-    box-shadow: 0 0 30px rgba(16, 185, 129, 0.5);
+    box-shadow:
+        0 0 25px rgba(16,185,129,0.6),
+        inset 0 0 15px rgba(16,185,129,0.2);
+}
+
+/* FOOTER */
+.footer-text {
+    color: #6b7280;
+    font-size: 12px;
+    text-align: center;
+    margin-top: 30px;
 }
 </style>
 """, unsafe_allow_html=True)
@@ -105,29 +122,25 @@ def load_files():
 model, encoder = load_files()
 locations = list(encoder.classes_)
 
-# -----------------------------
-# START MAIN BORDER
-# -----------------------------
+# =============================
+# MAIN UI START
+# =============================
 st.markdown("<div class='main-container'>", unsafe_allow_html=True)
 
-# -----------------------------
 # HEADER
-# -----------------------------
 st.markdown("<h1>🏠 House Price Prediction Using Machine Learning</h1>", unsafe_allow_html=True)
 st.markdown("<p style='color:#9ca3af !important;'>AI-Powered Real Estate Valuation</p>", unsafe_allow_html=True)
 
-# -----------------------------
 # INPUT CARD
-# -----------------------------
 st.markdown("<div class='input-card'>", unsafe_allow_html=True)
 
-col1, col2 = st.columns(2)
+c1, c2 = st.columns(2)
 
-with col1:
+with c1:
     location = st.selectbox("📍 SELECT CITY", locations)
     area = st.number_input("📐 AREA (SQFT)", min_value=100, value=1200)
 
-with col2:
+with c2:
     bhk = st.selectbox("🛏️ BHK STYLE", [1, 2, 3, 4, 5], index=1)
     bath = st.selectbox("🚿 BATHROOMS", [1, 2, 3, 4, 5], index=1)
 
@@ -135,9 +148,7 @@ predict = st.button("CALCULATE MARKET VALUE")
 
 st.markdown("</div>", unsafe_allow_html=True)
 
-# -----------------------------
 # RESULT
-# -----------------------------
 if predict:
     try:
         loc_idx = encoder.transform([location])[0]
@@ -146,23 +157,15 @@ if predict:
         st.markdown(f"""
         <div class='result-box'>
             <p style='font-size:14px; opacity:0.8;'>ESTIMATED MARKET PRICE</p>
-            <h2 style='font-size:38px;'>₹ {price:,.2f}</h2>
+            <h2 style='font-size:40px;'>₹ {price:,.2f}</h2>
         </div>
         """, unsafe_allow_html=True)
 
         st.balloons()
     except:
-        st.error("Model files not found or corrupted.")
+        st.error("Model or encoder file missing.")
 
-# -----------------------------
 # FOOTER
-# -----------------------------
-st.markdown(
-    "<p style='text-align:center; color:#4b5563 !important; font-size:12px; margin-top:30px;'>Optimized for Mobile & Desktop View</p>",
-    unsafe_allow_html=True
-)
+st.markdown("<p class='footer-text'>Optimized for Mobile & Desktop View</p>", unsafe_allow_html=True)
 
-# -----------------------------
-# END MAIN BORDER
-# -----------------------------
 st.markdown("</div>", unsafe_allow_html=True)
