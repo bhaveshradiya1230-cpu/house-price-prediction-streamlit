@@ -90,10 +90,18 @@ st.markdown("""
 # 3. Load Model
 # -----------------------------
 try:
-    model = pickle.load(open("../Model/house_model.pkl", "rb"))
-    encoder = pickle.load(open("../Model/location_encoder.pkl", "rb"))
+    BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+    MODEL_PATH = os.path.join(BASE_DIR, "..", "Model", "house_model.pkl")
+    ENCODER_PATH = os.path.join(BASE_DIR, "..", "Model", "location_encoder.pkl")
+
+    model = pickle.load(open(MODEL_PATH, "rb"))
+    encoder = pickle.load(open(ENCODER_PATH, "rb"))
+
     locations = encoder.classes_
-except:
+
+except Exception as e:
+    st.error(f"Model loading error: {e}")
     locations = ["Ahmedabad", "Mumbai", "Rajkot", "Jamnagar", "Gandhinagar"]
 
 # -----------------------------
@@ -141,4 +149,5 @@ if predict_click:
 
 st.markdown(
     "<p style='text-align:center; color:#4b5563 !important; font-size:12px; margin-top:30px;'>Optimized for Mobile & Desktop View</p>",
+
     unsafe_allow_html=True)
