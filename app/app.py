@@ -100,7 +100,7 @@ locations = list(encoder.classes_)
 # -----------------------------
 # 4. Header Section
 # -----------------------------
-st.markdown("<h1 style='font-size: 40px; margin-bottom: 0;'>🏠 ProphetHouse AI</h1>", unsafe_allow_html=True)
+st.markdown("<h1 style='font-size: 40px; margin-bottom: 0;'>🏠 House Price Prediction Using Machine Learning</h1>", unsafe_allow_html=True)
 st.markdown("<p style='color: #9ca3af !important;'>AI-Powered Real Estate Valuation</p>", unsafe_allow_html=True)
 
 # -----------------------------
@@ -143,4 +143,5 @@ if predict_click:
 st.markdown(
     "<p style='text-align:center; color:#4b5563 !important; font-size:12px; margin-top:30px;'>Optimized for Mobile & Desktop View</p>",
     unsafe_allow_html=True)
+
 
