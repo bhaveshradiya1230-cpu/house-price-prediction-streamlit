@@ -1,0 +1,11 @@
+
+pandas
+numpy
+scikit-learn
+pickle-mixin
+joblib
+tkinter
+matplotlib
+streamlit
+
+
