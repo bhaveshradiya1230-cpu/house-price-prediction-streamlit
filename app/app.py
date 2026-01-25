@@ -1,26 +1,18 @@
-import streamlit as st
-import numpy as np
-import pickle
 
-# -----------------------------
-# 1. Page Configuration
-# -----------------------------
-st.set_page_config(
-    page_title="ProphetHouse AI",
-    page_icon="🏠",
-    layout="centered"import streamlit as st
+import streamlit as st
 import numpy as np
 import pickle
 import os
 
 # -----------------------------
-# 1. Page Configuration
+# Page Configuration
 # -----------------------------
 st.set_page_config(
     page_title="ProphetHouse AI",
     page_icon="🏠",
     layout="centered"
 )
+
 
 # -----------------------------
 # 2. High-Contrast Professional CSS
@@ -299,4 +291,5 @@ st.markdown(
     "<p style='text-align:center; color:#4b5563 !important; font-size:12px; margin-top:30px;'>Optimized for Mobile & Desktop View</p>",
 
     unsafe_allow_html=True)
+
 
