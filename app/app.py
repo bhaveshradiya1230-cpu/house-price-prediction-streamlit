@@ -149,7 +149,7 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-)
+
 
 # -----------------------------
 # 2. High-Contrast Professional CSS
@@ -291,5 +291,6 @@ st.markdown(
     "<p style='text-align:center; color:#4b5563 !important; font-size:12px; margin-top:30px;'>Optimized for Mobile & Desktop View</p>",
 
     unsafe_allow_html=True)
+
 
 
