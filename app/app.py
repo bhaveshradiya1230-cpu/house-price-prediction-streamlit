@@ -53,23 +53,18 @@ header, footer, .stDeployButton {display: none !important;}
         inset 0 0 15px rgba(34,211,238,0.05);
 }
 
-/* Optimized Input Card Border */
+/* ===========================
+   INPUT CARD BORDER
+=========================== */
 .input-card {
-    border: 2px solid #22d3ee; /* Cyan Neon Border */
+    border: 2px solid #22d3ee;
     background-color: #111827;
-    padding: 30px;
-    border-radius: 20px;
-    box-shadow: 0 0 20px rgba(34, 211, 238, 0.2); /* Outer Glow */
-    margin-top: 20px;
-    margin-bottom: 20px;
-    display: block;
-    width: 100%;
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 0 25px rgba(34,211,238,0.3);
+    margin-top: 25px;
 }
 
-/* Ye line columns ko border ke andar set rakhegi */
-[data-testid="stHorizontalBlock"] {
-    padding: 10px 0px;
-}
 /* HEADINGS */
 h1, h2, p {
     color: #ffffff !important;
@@ -148,26 +143,22 @@ st.markdown("<div class='main-container'>", unsafe_allow_html=True)
 st.markdown("<h1>🏠 House Price Prediction Using Machine Learning</h1>", unsafe_allow_html=True)
 st.markdown("<p style='color:#9ca3af !important;'>AI-Powered Real Estate Valuation</p>", unsafe_allow_html=True)
 
-# INPUT CARD START
+# INPUT CARD
 st.markdown("<div class='input-card'>", unsafe_allow_html=True)
 
-# Columns define karein
 c1, c2 = st.columns(2)
 
 with c1:
     location = st.selectbox("📍 SELECT CITY", locations)
-    # Step=1 add karne se screenshot jaisa +/- button mil jayega
-    area = st.number_input("📐 AREA (SQFT)", min_value=100, value=1202, step=1)
+    area = st.number_input("📐 AREA (SQFT)", min_value=100, value=1200)
 
 with c2:
     bhk = st.selectbox("🛏️ BHK STYLE", [1, 2, 3, 4, 5], index=1)
     bath = st.selectbox("🚿 BATHROOMS", [1, 2, 3, 4, 5], index=1)
 
-# Button ko div ke andar hi rakhein taaki border me dikhe
 predict = st.button("CALCULATE MARKET VALUE")
 
-st.markdown("</div>", unsafe_allow_html=True) 
-# INPUT CARD END
+st.markdown("</div>", unsafe_allow_html=True)
 
 # RESULT
 if predict:
@@ -191,6 +182,5 @@ if predict:
 st.markdown("<p class='footer-text'>Optimized for Mobile & Desktop View</p>", unsafe_allow_html=True)
 
 st.markdown("</div>", unsafe_allow_html=True)
-
 
 
