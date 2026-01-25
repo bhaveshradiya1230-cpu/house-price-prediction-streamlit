@@ -2,6 +2,18 @@ import streamlit as st
 import numpy as np
 import pickle
 
+
+#Function 
+def format_inr(amount):
+    amount = round(amount, 2)
+    s = f"{amount:.2f}"
+    integer, decimal = s.split(".")
+    if len(integer) > 3:
+        integer = integer[:-3][::-1]
+        groups = [integer[i:i+2] for i in range(0, len(integer), 2)]
+        integer = ",".join(groups)[::-1] + "," + s[-6:-3]
+    return f"₹ {integer}.{decimal}"
+
 # -----------------------------
 # PAGE CONFIG
 # -----------------------------
@@ -170,4 +182,5 @@ if predict:
 st.markdown("<p class='footer-text'>Optimized for Mobile & Desktop View</p>", unsafe_allow_html=True)
 
 st.markdown("</div>", unsafe_allow_html=True)
+
 
