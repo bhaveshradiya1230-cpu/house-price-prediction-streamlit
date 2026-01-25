@@ -87,15 +87,16 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # -----------------------------
-# 3. Load Model
+# LOAD MODEL & ENCODER
 # -----------------------------
-try:
-    model = pickle.load(open("../Model/house_model.pkl", "rb"))
-    encoder = pickle.load(open("../Model/location_encoder.pkl", "rb"))
-    locations = encoder.classes_
-except:
-    locations = ["Ahmedabad", "Mumbai", "Rajkot", "Jamnagar", "Gandhinagar"]
+@st.cache_resource
+def load_files():
+    model = pickle.load(open("Model/house_model.pkl", "rb"))
+    encoder = pickle.load(open("Model/location_encoder.pkl", "rb"))
+    return model, encoder
 
+model, encoder = load_files()
+locations = list(encoder.classes_)
 # -----------------------------
 # 4. Header Section
 # -----------------------------
@@ -142,3 +143,4 @@ if predict_click:
 st.markdown(
     "<p style='text-align:center; color:#4b5563 !important; font-size:12px; margin-top:30px;'>Optimized for Mobile & Desktop View</p>",
     unsafe_allow_html=True)
+
