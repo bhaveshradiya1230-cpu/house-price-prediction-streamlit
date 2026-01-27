@@ -142,7 +142,7 @@ st.markdown("<div class='main-container'>", unsafe_allow_html=True)
 # HEADER
 st.markdown("<h1>🏠 House Price Prediction Using Machine Learning</h1>", unsafe_allow_html=True)
 st.markdown("<p style='color:#9ca3af !important;'>AI-Powered Real Estate Valuation</p>", unsafe_allow_html=True)
-
+<div class='result-box'>
 # INPUT CARD
 st.markdown("<div class='input-card'>", unsafe_allow_html=True)
 
@@ -157,7 +157,7 @@ with c2:
     bath = st.selectbox("🚿 BATHROOMS", [1, 2, 3, 4, 5], index=1)
 
 predict = st.button("CALCULATE MARKET VALUE")
-
+</div>
 st.markdown("</div>", unsafe_allow_html=True)
 
 # RESULT
@@ -182,5 +182,6 @@ if predict:
 st.markdown("<p class='footer-text'>Optimized for Mobile & Desktop View</p>", unsafe_allow_html=True)
 
 st.markdown("</div>", unsafe_allow_html=True)
+
 
 
