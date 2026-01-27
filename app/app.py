@@ -2,8 +2,9 @@ import streamlit as st
 import numpy as np
 import pickle
 
-
-#Function 
+# -----------------------------
+# Function
+# -----------------------------
 def format_inr(amount):
     amount = round(amount, 2)
     s = f"{amount:.2f}"
@@ -24,100 +25,132 @@ st.set_page_config(
 )
 
 # -----------------------------
-# ADVANCED PROFESSIONAL CSS
+# ADVANCED CSS (FIXED INPUT + MOBILE)
 # -----------------------------
 st.markdown("""
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap');
 
+* { font-family: 'Plus Jakarta Sans', sans-serif; }
+
 .stApp {
-    background-color: #0b0f19;
-    font-family: 'Plus Jakarta Sans', sans-serif;
+    background: radial-gradient(circle at top, #0f172a, #020617);
 }
 
-/* Hide Streamlit UI */
-header, footer, .stDeployButton {display: none !important;}
+/* Hide Streamlit default UI */
+header, footer, .stDeployButton { display: none !important; }
 
-/* ===========================
-   MAIN APP GLOWING BORDER
-=========================== */
+/* ================= MAIN CARD ================= */
 .main-container {
-    border: 2px solid #22d3ee;
-    border-radius: 20px;
-    padding: 35px 30px;
     max-width: 900px;
     margin: auto;
-    background: linear-gradient(180deg, #0b1220, #020617);
-    box-shadow:
-        0 0 20px rgba(34,211,238,0.25),
-        inset 0 0 15px rgba(34,211,238,0.05);
+    padding: 35px 30px;
+    border-radius: 22px;
+    background: linear-gradient(180deg, #020617, #020617);
+    border: 2px solid rgba(34,211,238,0.5);
+    box-shadow: 0 0 30px rgba(34,211,238,0.25);
 }
 
-/* ===========================
-   INPUT CARD BORDER
-=========================== */
+/* ================= INPUT CARD ================= */
 .input-card {
-    border: 2px solid #22d3ee;
-    background-color: #111827;
-    padding: 25px;
-    border-radius: 15px;
-    box-shadow: 0 0 25px rgba(34,211,238,0.3);
+    background: #020617;
+    border-radius: 18px;
+    padding: 28px;
     margin-top: 25px;
+    border: 1px solid rgba(34,211,238,0.4);
+    box-shadow: inset 0 0 20px rgba(34,211,238,0.05);
 }
 
-/* HEADINGS */
-h1, h2, p {
-    color: #ffffff !important;
+/* ================= HEADINGS ================= */
+h1 {
+    font-weight: 800;
     text-align: center;
+    color: #e5e7eb;
 }
 
-/* LABELS */
+p {
+    text-align: center;
+    color: #94a3b8;
+}
+
+/* ================= LABELS ================= */
 label p {
     color: #22d3ee !important;
-    font-weight: 700 !important;
-    font-size: 14px !important;
+    font-weight: 600;
+    font-size: 13px;
 }
 
-/* BUTTON */
+/* ================= INPUTS ================= */
+input, select, textarea {
+    background-color: #020617 !important;
+    color: #e5e7eb !important;
+    border-radius: 12px !important;
+    border: 1px solid rgba(34,211,238,0.4) !important;
+}
+
+/* Selectbox arrow + container */
+div[data-baseweb="select"] {
+    background-color: #020617;
+    border-radius: 12px;
+    border: 1px solid rgba(34,211,238,0.4);
+}
+
+/* ================= BUTTON ================= */
 div.stButton > button {
     width: 100%;
     height: 52px;
-    font-size: 18px;
+    margin-top: 15px;
+    border-radius: 14px;
+    font-size: 17px;
     font-weight: 700;
-    border-radius: 12px;
-    border: 1px solid #22d3ee;
     background: linear-gradient(90deg, #0891b2, #0e7490);
+    border: none;
     color: white;
-    transition: 0.3s;
+    transition: all 0.3s ease;
 }
 
 div.stButton > button:hover {
     background: #22d3ee;
     color: #020617;
-    box-shadow: 0 0 20px #22d3ee;
+    box-shadow: 0 0 25px #22d3ee;
+    transform: scale(1.02);
 }
 
-/* ===========================
-   RESULT PRICE GLOW
-=========================== */
+/* ================= RESULT ================= */
 .result-box {
-    background: #064e3b;
-    border: 2px solid #10b981;
-    padding: 25px;
-    border-radius: 15px;
     margin-top: 30px;
+    padding: 25px;
+    border-radius: 18px;
+    background: linear-gradient(180deg, #022c22, #064e3b);
+    border: 2px solid #10b981;
     text-align: center;
-    box-shadow:
-        0 0 25px rgba(16,185,129,0.6),
-        inset 0 0 15px rgba(16,185,129,0.2);
+    box-shadow: 0 0 30px rgba(16,185,129,0.6);
 }
 
-/* FOOTER */
+.result-box h2 {
+    color: #ecfdf5;
+    font-size: 38px;
+}
+
+/* ================= FOOTER ================= */
 .footer-text {
-    color: #6b7280;
+    margin-top: 25px;
     font-size: 12px;
     text-align: center;
-    margin-top: 30px;
+    color: #64748b;
+}
+
+/* ================= MOBILE ================= */
+@media (max-width: 600px) {
+    .main-container {
+        padding: 25px 18px;
+    }
+    h1 {
+        font-size: 22px;
+    }
+    .result-box h2 {
+        font-size: 30px;
+    }
 }
 </style>
 """, unsafe_allow_html=True)
@@ -134,53 +167,40 @@ def load_files():
 model, encoder = load_files()
 locations = list(encoder.classes_)
 
-# =============================
-# MAIN UI START
-# =============================
+# ================= UI =================
 st.markdown("<div class='main-container'>", unsafe_allow_html=True)
 
-# HEADER
-st.markdown("<h1>🏠 House Price Prediction Using Machine Learning</h1>", unsafe_allow_html=True)
-st.markdown("<p style='color:#9ca3af !important;'>AI-Powered Real Estate Valuation</p>", unsafe_allow_html=True)
+st.markdown("<h1>🏠 House Price Prediction</h1>", unsafe_allow_html=True)
+st.markdown("<p>AI-Powered Real Estate Valuation</p>", unsafe_allow_html=True)
 
-# INPUT CARD
 st.markdown("<div class='input-card'>", unsafe_allow_html=True)
 
 c1, c2 = st.columns(2)
 
 with c1:
-    location = st.selectbox("📍 SELECT CITY", locations)
+    location = st.selectbox("📍 LOCATION", locations)
     area = st.number_input("📐 AREA (SQFT)", min_value=100, value=1200)
 
 with c2:
-    bhk = st.selectbox("🛏️ BHK STYLE", [1, 2, 3, 4, 5], index=1)
-    bath = st.selectbox("🚿 BATHROOMS", [1, 2, 3, 4, 5], index=1)
+    bhk = st.selectbox("🛏️ BHK", [1,2,3,4,5], index=1)
+    bath = st.selectbox("🚿 BATH", [1,2,3,4,5], index=1)
 
-predict = st.button("CALCULATE MARKET VALUE")
+predict = st.button("💰 CALCULATE PRICE")
 
 st.markdown("</div>", unsafe_allow_html=True)
 
-# RESULT
 if predict:
-    try:
-        loc_idx = encoder.transform([location])[0]
-        price = model.predict(np.array([[area, bhk, bath, loc_idx]]))[0]
+    loc_idx = encoder.transform([location])[0]
+    price = model.predict(np.array([[area, bhk, bath, loc_idx]]))[0]
 
-        st.markdown(f"""
-        <div class='result-box'>
-            <p style='font-size:14px; opacity:0.8;'>ESTIMATED MARKET PRICE</p>
-            <h2 style='font-size:40px;'>{format_inr(price)}</h2>
+    st.markdown(f"""
+    <div class='result-box'>
+        <p>ESTIMATED PRICE</p>
+        <h2>{format_inr(price)}</h2>
+    </div>
+    """, unsafe_allow_html=True)
 
-        </div>
-        """, unsafe_allow_html=True)
+    st.balloons()
 
-        st.balloons()
-    except:
-        st.error("Model or encoder file missing.")
-
-# FOOTER
-st.markdown("<p class='footer-text'>Optimized for Mobile & Desktop View</p>", unsafe_allow_html=True)
-
+st.markdown("<p class='footer-text'>Optimized for Mobile & Desktop</p>", unsafe_allow_html=True)
 st.markdown("</div>", unsafe_allow_html=True)
-
-
