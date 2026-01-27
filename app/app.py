@@ -57,7 +57,7 @@ header, footer, .stDeployButton {display: none !important;}
    INPUT CARD BORDER
 =========================== */
 .input-card {
-    border: 2px solid #22d3ee;
+    border: 2px solid #10b981;
     background-color: #111827;
     padding: 25px;
     border-radius: 15px;
@@ -182,6 +182,7 @@ if predict:
 st.markdown("<p class='footer-text'>Optimized for Mobile & Desktop View</p>", unsafe_allow_html=True)
 
 st.markdown("</div>", unsafe_allow_html=True)
+
 
 
 
