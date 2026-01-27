@@ -25,7 +25,7 @@ st.set_page_config(
 )
 
 # -----------------------------
-# CORPORATE WEBSITE CSS
+# STRONG BORDER CSS
 # -----------------------------
 st.markdown("""
 <style>
@@ -34,95 +34,94 @@ st.markdown("""
 * { font-family: 'Inter', sans-serif; }
 
 .stApp {
-    background-color: #0f172a;
+    background: #0f172a;
 }
 
-/* Hide Streamlit default UI */
 header, footer, .stDeployButton { display: none !important; }
 
-/* ================= CONTAINER ================= */
-.container {
+/* MAIN PAGE */
+.page {
     max-width: 900px;
     margin: auto;
     padding: 50px 20px;
 }
 
-/* ================= CARD ================= */
+/* MAIN CARD */
 .card {
     background: #ffffff;
     border-radius: 18px;
     padding: 40px;
-    box-shadow: 0 20px 50px rgba(0,0,0,0.18);
+    box-shadow: 0 25px 60px rgba(0,0,0,0.25);
 }
 
-/* ================= TITLE ================= */
+/* TITLE */
 h1 {
     text-align: center;
-    font-weight: 700;
     color: #0f172a;
+    font-weight: 700;
 }
 
 .subtitle {
     text-align: center;
-    color: #64748b;
+    color: #475569;
+    margin-bottom: 30px;
     font-size: 14px;
-    margin-bottom: 35px;
 }
 
-/* ================= FORM BORDER ================= */
-.form-wrapper {
-    border: 1.5px solid #e5e7eb;
+/* ================== FORM BORDER (VERY CLEAR) ================== */
+.form-border {
+    border: 2.5px solid #1e293b;   /* <<< STRONG BORDER */
     border-radius: 14px;
-    padding: 28px;
-    background: #f8fafc;
+    padding: 30px;
+    background: #f9fafb;
+    box-shadow: inset 0 0 0 1px #e5e7eb;
 }
 
-/* ================= LABELS ================= */
+/* LABELS */
 label p {
     font-size: 13px;
     font-weight: 600;
-    color: #334155;
+    color: #1e293b;
 }
 
-/* ================= INPUTS ================= */
+/* INPUTS */
 input, select {
-    background-color: #ffffff !important;
+    background: #ffffff !important;
+    border: 1.5px solid #94a3b8 !important;
     border-radius: 10px !important;
-    border: 1px solid #cbd5e1 !important;
     color: #0f172a !important;
 }
 
-/* Selectbox container */
+/* SELECTBOX FIX */
 div[data-baseweb="select"] {
     border-radius: 10px;
-    border: 1px solid #cbd5e1;
+    border: 1.5px solid #94a3b8;
 }
 
-/* ================= BUTTON ================= */
+/* BUTTON */
 div.stButton > button {
     width: 100%;
     height: 50px;
-    margin-top: 22px;
+    margin-top: 25px;
     border-radius: 10px;
+    background: #2563eb;
+    color: white;
     font-size: 16px;
     font-weight: 600;
-    background-color: #2563eb;
-    color: white;
     border: none;
-    transition: 0.25s ease;
 }
 
 div.stButton > button:hover {
-    background-color: #1d4ed8;
+    background: #1d4ed8;
 }
 
-/* ================= RESULT ================= */
+/* RESULT */
 .result-box {
-    margin-top: 28px;
+    margin-top: 30px;
     padding: 24px;
-    border-radius: 14px;
-    background: #ecfeff;
-    border: 1.5px solid #67e8f9;
+    border-radius: 12px;
+    border: 2px solid #2563eb;
+    background: #eff6ff;
     text-align: center;
 }
 
@@ -131,17 +130,17 @@ div.stButton > button:hover {
     color: #0f172a;
 }
 
-/* ================= FOOTER ================= */
+/* FOOTER */
 .footer {
-    text-align: center;
-    font-size: 12px;
-    color: #94a3b8;
     margin-top: 25px;
+    font-size: 12px;
+    text-align: center;
+    color: #64748b;
 }
 
-/* ================= MOBILE ================= */
-@media (max-width: 600px) {
-    .card { padding: 28px; }
+/* MOBILE */
+@media (max-width:600px){
+    .card { padding: 25px; }
     h1 { font-size: 22px; }
 }
 </style>
@@ -159,18 +158,17 @@ def load_files():
 model, encoder = load_files()
 locations = list(encoder.classes_)
 
-# ================= UI =================
-st.markdown("<div class='container'>", unsafe_allow_html=True)
+# -----------------------------
+# UI
+# -----------------------------
+st.markdown("<div class='page'>", unsafe_allow_html=True)
 st.markdown("<div class='card'>", unsafe_allow_html=True)
 
 st.markdown("<h1>🏠 House Price Prediction</h1>", unsafe_allow_html=True)
-st.markdown(
-    "<div class='subtitle'>AI-powered real estate valuation for smart decisions</div>",
-    unsafe_allow_html=True
-)
+st.markdown("<div class='subtitle'>Corporate real-world property valuation system</div>", unsafe_allow_html=True)
 
-# -------- FORM (SINGLE BORDER) --------
-st.markdown("<div class='form-wrapper'>", unsafe_allow_html=True)
+# -------- FORM WITH CLEAR BORDER --------
+st.markdown("<div class='form-border'>", unsafe_allow_html=True)
 
 c1, c2 = st.columns(2)
 
@@ -186,18 +184,18 @@ predict = st.button("Calculate Property Price")
 
 st.markdown("</div>", unsafe_allow_html=True)
 
-# -------- RESULT --------
+# RESULT
 if predict:
     loc_idx = encoder.transform([location])[0]
     price = model.predict(np.array([[area, bhk, bath, loc_idx]]))[0]
 
     st.markdown(f"""
-    <div class='result-box'>
+    <div class="result-box">
         <p style="font-size:13px;color:#475569;">Estimated Market Value</p>
         <h2>{format_inr(price)}</h2>
     </div>
     """, unsafe_allow_html=True)
 
-st.markdown("<div class='footer'>Internship • Placement • Client-Demo Ready</div>", unsafe_allow_html=True)
+st.markdown("<div class='footer'>Client-Demo • Internship • Placement Ready</div>", unsafe_allow_html=True)
 
 st.markdown("</div></div>", unsafe_allow_html=True)
