@@ -215,7 +215,7 @@ locations = list(encoder.classes_)
 st.markdown("""
 <div class="main">
 <h1>🏠 House Price Prediction</h1>
-<div class="subtitle">AI-Powered Valuation & Smart Insights</div>
+
 </div>
 """, unsafe_allow_html=True)
 
@@ -257,4 +257,5 @@ if predict:
         Expected Range: {format_inr(low)} - {format_inr(high)}
     </div>
     """, unsafe_allow_html=True)
+
 
