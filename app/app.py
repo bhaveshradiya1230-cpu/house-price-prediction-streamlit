@@ -169,7 +169,9 @@ with c2:
 
 predict = st.button("Calculate Property Price")
 
-st.markdown("</div>", unsafe_allow_html=True)
+</div>
+    
+""", unsafe_allow_html=True)
 
 # -----------------------------
 # RESULT
@@ -199,4 +201,5 @@ if predict:
 
 st.markdown("<div class='footer-text'>Client Demo • Internship • Placement Ready</div>", unsafe_allow_html=True)
 st.markdown("</div>", unsafe_allow_html=True)
+
 
