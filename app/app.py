@@ -61,7 +61,7 @@ st.set_page_config(
 )
 
 # -----------------------------
-# PREMIUM UI CSS + FONT
+# PREMIUM UI CSS + FONT + NEON INPUT
 # -----------------------------
 st.markdown("""
 <style>
@@ -108,6 +108,38 @@ h1 {
     font-weight: 500;
 }
 
+/* Input labels in white */
+label {
+    color: #ffffff !important;
+    font-weight: 500;
+}
+
+/* Neon-glow input boxes */
+input[type="number"], .stSelectbox select {
+    background: #020617 !important;
+    color: #e5e7eb !important;
+    border: 2px solid #22d3ee !important;
+    border-radius: 12px;
+    padding: 8px 12px;
+    box-shadow: 0 0 10px #22d3ee;
+}
+
+/* Transparent buttons with neon border */
+button {
+    border-radius: 14px !important;
+    font-weight: 700 !important;
+    background: transparent !important;
+    color: #22d3ee !important;
+    border: 2px solid #22d3ee !important;
+    padding: 10px 20px !important;
+}
+
+button:hover {
+    transform: scale(1.05);
+    background: rgba(34,211,238,0.1) !important;
+}
+
+/* Cards */
 .card {
     margin-top: 25px;
     padding: 26px;
@@ -149,18 +181,6 @@ h1 {
     display: block;
     height: 100%;
     background: linear-gradient(90deg, #22d3ee, #10b981);
-}
-
-button {
-    border-radius: 14px !important;
-    font-weight: 700 !important;
-    background: linear-gradient(90deg,#22d3ee,#10b981) !important;
-    color: #020617 !important;
-    padding: 10px 20px !important;
-}
-
-button:hover {
-    transform: scale(1.05);
 }
 
 @media(max-width:600px){
@@ -232,8 +252,8 @@ if predict:
         <div class="progress"><span style="width:{confidence}%"></span></div>
         <p style="font-size:13px;margin-top:6px;">Confidence Score: {confidence}%</p>
 
-        <p>💡 {advice}</p>
-        <p>{space_tip}</p>
-        <p><b>Expected Range:</b> {format_inr(low)} - {format_inr(high)}</p>
+        💡 {advice} <br>
+        {space_tip} <br>
+        <b>Expected Range:</b> {format_inr(low)} - {format_inr(high)}
     </div>
     """, unsafe_allow_html=True)
