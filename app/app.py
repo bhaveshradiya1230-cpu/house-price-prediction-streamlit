@@ -173,7 +173,7 @@ locations = list(encoder.classes_)
 # -----------------------------
 st.markdown(f""<div class='form-container'>
 
-<h1>🏠 House Price Prediction</h1>, unsafe_allow_html=True)
+<h1> House Price Prediction</h1>, unsafe_allow_html=True)
 <div class='subtitle'>AI Powered Valuation & Recommendation System</div>""", unsafe_allow_html=True)
 
 
@@ -218,5 +218,6 @@ if predict:
 
 st.markdown("<div class='footer-text'>Client Demo • Internship • Placement Ready 💼</div>", unsafe_allow_html=True)
 st.markdown("</div>", unsafe_allow_html=True)
+
 
 
