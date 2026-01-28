@@ -251,12 +251,14 @@ if predict:
         <h4>📊 Price Confidence</h4>
         <div class="progress"><span style="width:{confidence}%"></span></div>
         <p style="font-size:13px;margin-top:6px;">Confidence Score: {confidence}%</p>
-
-    <list>    <li>💡 {advice}</li></list> 
-        {space_tip} 
-        Expected Range: {format_inr(low)} - {format_inr(high)}
+            <list> 
+           <li>💡 {advice}</li>
+           <li>   {space_tip} </li>
+           <li>   Expected Range: {format_inr(low)} - {format_inr(high)}</li>
+        </list> 
     </div>
     """, unsafe_allow_html=True)
+
 
 
 
