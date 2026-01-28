@@ -171,7 +171,7 @@ locations = list(encoder.classes_)
 # -----------------------------
 # UI
 # -----------------------------
-st.markdown("<div class='main-container'>", unsafe_allow_html=True)
+
 
 st.markdown("<h1>🏠 House Price Prediction</h1>", unsafe_allow_html=True)
 st.markdown("<div class='subtitle'>AI Powered Valuation & Recommendation System</div>", unsafe_allow_html=True)
@@ -188,7 +188,7 @@ with c2:
     bath = st.selectbox("🚿 Bathrooms", [1,2,3,4,5], index=1)
 
 predict = st.button("Calculate Property Price")
-st.markdown("</div>", unsafe_allow_html=True)
+
 
 # -----------------------------
 # RESULT + RECOMMENDATION
@@ -218,3 +218,4 @@ if predict:
 
 st.markdown("<div class='footer-text'>Client Demo • Internship • Placement Ready 💼</div>", unsafe_allow_html=True)
 st.markdown("</div>", unsafe_allow_html=True)
+
