@@ -61,80 +61,118 @@ st.set_page_config(
 )
 
 # -----------------------------
-# PREMIUM UI CSS
+# PREMIUM UI CSS + FONT
 # -----------------------------
 st.markdown("""
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap');
-*{font-family:'Inter',sans-serif;}
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Roboto+Slab:wght@400;700&display=swap');
 
-.stApp{
-background:radial-gradient(circle at top,#020617,#000000);
+* {
+    font-family: 'Inter', sans-serif;
+    transition: all 0.3s ease;
 }
 
-header,footer{display:none;}
-
-.main{
-max-width:920px;
-margin:auto;
-padding:40px;
-border-radius:22px;
-background:#020617;
-border:2px solid #22d3ee;
-box-shadow:0 0 45px rgba(34,211,238,.35);
+.stApp {
+    background: radial-gradient(circle at top, #020617, #000000);
+    color: #e5e7eb;
 }
 
-h1{color:#e5e7eb;font-weight:800;text-align:center;}
-.subtitle{color:#94a3b8;text-align:center;margin-top:-8px;}
-
-.card{
-margin-top:25px;
-padding:26px;
-border-radius:18px;
-background:#020617;
-border:2px solid #38bdf8;
+header, footer {
+    display: none;
 }
 
-.result{
-background:linear-gradient(180deg,#022c22,#064e3b);
-border:2px solid #10b981;
-box-shadow:0 0 35px rgba(16,185,129,.6);
-color:#ecfdf5;
+.main {
+    max-width: 920px;
+    margin: auto;
+    padding: 40px;
+    border-radius: 22px;
+    background: #020617;
+    border: 2px solid #22d3ee;
+    box-shadow: 0 0 45px rgba(34,211,238,.35);
+    font-family: 'Roboto Slab', serif;
 }
 
-.badge{
-display:inline-block;
-padding:6px 14px;
-border-radius:999px;
-background:#0f172a;
-border:1px solid #38bdf8;
-color:#7dd3fc;
-font-size:12px;
-margin-top:10px;
+h1 {
+    color: #e5e7eb;
+    font-weight: 800;
+    text-align: center;
+    font-size: 36px;
+    letter-spacing: 1px;
 }
 
-.progress{
-height:10px;
-background:#020617;
-border-radius:999px;
-border:1px solid #38bdf8;
-overflow:hidden;
+.subtitle {
+    color: #94a3b8;
+    text-align: center;
+    margin-top: -8px;
+    font-size: 16px;
+    font-weight: 500;
 }
 
-.progress span{
-display:block;
-height:100%;
-background:linear-gradient(90deg,#22d3ee,#10b981);
+.card {
+    margin-top: 25px;
+    padding: 26px;
+    border-radius: 18px;
+    background: #020617;
+    border: 2px solid #38bdf8;
+    box-shadow: 0 0 25px rgba(56,189,248,.25);
 }
 
-button{
-border-radius:14px !important;
-font-weight:700 !important;
+.result {
+    background: linear-gradient(180deg, #022c22, #064e3b);
+    border: 2px solid #10b981;
+    box-shadow: 0 0 35px rgba(16,185,129,.6);
+    color: #ecfdf5;
+}
+
+.badge {
+    display: inline-block;
+    padding: 6px 14px;
+    border-radius: 999px;
+    background: #0f172a;
+    border: 1px solid #38bdf8;
+    color: #7dd3fc;
+    font-size: 12px;
+    margin-top: 10px;
+    font-weight: 600;
+}
+
+.progress {
+    height: 12px;
+    background: #020617;
+    border-radius: 999px;
+    border: 1px solid #38bdf8;
+    overflow: hidden;
+    margin-top: 8px;
+}
+
+.progress span {
+    display: block;
+    height: 100%;
+    background: linear-gradient(90deg, #22d3ee, #10b981);
+}
+
+button {
+    border-radius: 14px !important;
+    font-weight: 700 !important;
+    background: linear-gradient(90deg,#22d3ee,#10b981) !important;
+    color: #020617 !important;
+    padding: 10px 20px !important;
+}
+
+button:hover {
+    transform: scale(1.05);
 }
 
 @media(max-width:600px){
-.main{padding:25px;}
-h1{font-size:24px;}
+    .main {
+        padding: 25px;
+    }
+    h1 {
+        font-size: 24px;
+    }
+    .subtitle {
+        font-size: 14px;
+    }
 }
 </style>
 """, unsafe_allow_html=True)
@@ -161,7 +199,7 @@ st.markdown("""
 </div>
 """, unsafe_allow_html=True)
 
-c1,c2 = st.columns(2)
+c1, c2 = st.columns(2)
 with c1:
     location = st.selectbox("📍 Location", locations)
     area = st.number_input("📐 Area (sqft)", min_value=100, value=1500)
