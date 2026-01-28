@@ -3,45 +3,41 @@ import numpy as np
 import pickle
 
 # -----------------------------
-# INR FORMAT (INT ONLY)
+# INR FORMAT
 # -----------------------------
 def format_inr(amount):
     amount = int(amount)
     s = str(amount)
-
     if len(s) > 3:
         last3 = s[-3:]
         rest = s[:-3][::-1]
         groups = [rest[i:i+2] for i in range(0, len(rest), 2)]
         s = ",".join(groups)[::-1] + "," + last3
-
     return f"₹ {s}"
 
 # -----------------------------
 # RECOMMENDATION ENGINE
 # -----------------------------
 def get_recommendation(price, area, bhk):
-    # Category
-    if price < 30_00_000:
-        category = "🟢 Budget Property"
-        advice = "Good for first-time buyers & rental income."
-    elif price < 70_00_000:
-        category = "🔵 Mid-Range Property"
-        advice = "Balanced price. Suitable for end-users."
-    elif price < 1_50_00_000:
-        category = "🟣 Premium Property"
-        advice = "High-demand segment. Long-term appreciation expected."
+    if price < 3000000:
+        category = "Budget Property"
+        advice = "Good for first-time buyers and rental income."
+    elif price < 7000000:
+        category = "Mid-Range Property"
+        advice = "Balanced pricing, suitable for families."
+    elif price < 15000000:
+        category = "Premium Property"
+        advice = "High demand segment, good appreciation potential."
     else:
-        category = "🔴 Luxury Property"
-        advice = "Premium buyers zone. Ideal for wealth parking."
+        category = "Luxury Property"
+        advice = "Ideal for premium buyers and long-term investment."
 
-    # Area + BHK insight
-    if area / bhk < 350:
-        space_tip = "⚠️ Compact layout. Space efficiency is average."
-    else:
-        space_tip = "✅ Spacious layout. Good livability score."
+    space_tip = (
+        "Compact layout, space utilization is average."
+        if area / bhk < 350
+        else "Spacious layout with good livability."
+    )
 
-    # Confidence range
     low = int(price * 0.9)
     high = int(price * 1.1)
 
@@ -83,26 +79,11 @@ header, footer, .stDeployButton { display: none !important; }
     margin-top: 30px;
     padding: 30px;
     border-radius: 14px;
-    background: #020617;
     border: 2px solid #38bdf8;
 }
 
-h1 {
-    color: #e5e7eb;
-    text-align: center;
-}
-
-.subtitle {
-    color: #94a3b8;
-    text-align: center;
-    font-size: 14px;
-}
-
-label p {
-    color: #cbd5f5 !important;
-    font-size: 13px;
-    font-weight: 600;
-}
+h1 { color: #e5e7eb; text-align: center; }
+.subtitle { color: #94a3b8; text-align: center; font-size: 14px; }
 
 input {
     background: #020617 !important;
@@ -133,7 +114,6 @@ div.stButton > button {
     margin-top: 35px;
     padding: 28px;
     border-radius: 16px;
-    background: #020617;
     border: 2px solid #22c55e;
     text-align: center;
 }
@@ -142,7 +122,6 @@ div.stButton > button {
     margin-top: 25px;
     padding: 22px;
     border-radius: 14px;
-    background: #020617;
     border: 2px dashed #38bdf8;
     color: #e5e7eb;
 }
@@ -171,27 +150,29 @@ locations = list(encoder.classes_)
 # -----------------------------
 # UI
 # -----------------------------
-st.markdown(f""<div class='form-container'>
-
-<h1> House Price Prediction</h1>, unsafe_allow_html=True)
-<div class='subtitle'>AI Powered Valuation & Recommendation System</div>""", unsafe_allow_html=True)
-
-
+st.markdown("""
+<div class="main-container">
+    <h1>House Price Prediction</h1>
+    <div class="subtitle">AI Powered Valuation & Recommendation System</div>
+    <div class="form-container">
+""", unsafe_allow_html=True)
 
 c1, c2 = st.columns(2)
+
 with c1:
-    location = st.selectbox("📍 Location", locations)
-    area = st.number_input("📐 Area (sqft)", min_value=100, value=1500)
+    location = st.selectbox("Location", locations)
+    area = st.number_input("Area (sqft)", min_value=100, value=1500)
 
 with c2:
-    bhk = st.selectbox("🛏️ BHK", [1,2,3,4,5], index=2)
-    bath = st.selectbox("🚿 Bathrooms", [1,2,3,4,5], index=1)
+    bhk = st.selectbox("BHK", [1,2,3,4,5], index=2)
+    bath = st.selectbox("Bathrooms", [1,2,3,4,5], index=1)
 
 predict = st.button("Calculate Property Price")
 
+st.markdown("</div>", unsafe_allow_html=True)
 
 # -----------------------------
-# RESULT + RECOMMENDATION
+# RESULT
 # -----------------------------
 if predict:
     loc_idx = encoder.transform([location])[0]
@@ -204,20 +185,17 @@ if predict:
 
     st.markdown(f"""
     <div class="result-box">
-        <p style="color:#94a3b8;">Estimated Market Value</p>
+        <p>Estimated Market Value</p>
         <h2>{format_inr(final_price)}</h2>
     </div>
 
     <div class="reco-box">
         <h4>{category}</h4>
-        <p>💡 {advice}</p>
+        <p><b>Tip:</b> {advice}</p>
         <p>{space_tip}</p>
-        <p>📊 Expected Price Range: <b>{format_inr(low)} – {format_inr(high)}</b></p>
+        <p><b>Expected Range:</b> {format_inr(low)} – {format_inr(high)}</p>
     </div>
     """, unsafe_allow_html=True)
 
-st.markdown("<div class='footer-text'>Client Demo • Internship • Placement Ready 💼</div>", unsafe_allow_html=True)
+st.markdown("<div class='footer-text'>Client Demo • Internship • Placement Ready</div>", unsafe_allow_html=True)
 st.markdown("</div>", unsafe_allow_html=True)
-
-
-
