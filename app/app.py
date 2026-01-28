@@ -3,7 +3,7 @@ import numpy as np
 import pickle
 
 # -----------------------------
-# INR FORMAT
+# INR FORMAT (NO CHANGE)
 # -----------------------------
 def format_inr(amount):
     amount = int(amount)
@@ -16,7 +16,7 @@ def format_inr(amount):
     return f"₹ {s}"
 
 # -----------------------------
-# RECOMMENDATION ENGINE
+# RECOMMENDATION ENGINE (NO CHANGE)
 # -----------------------------
 def get_recommendation(price, area, bhk):
     if price < 3000000:
@@ -53,27 +53,81 @@ st.set_page_config(
 )
 
 # -----------------------------
-# CSS
+# 🔥 REAL-WORLD MODERN CSS (ONLY NEW PART)
 # -----------------------------
 st.markdown("""
 <style>
-* { font-family: Inter, sans-serif; }
-.stApp { background: radial-gradient(circle at top, #0f172a, #020617); }
-header, footer { display: none; }
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap');
+
+* {
+    font-family: 'Inter', sans-serif;
+}
+
+.stApp {
+    background: radial-gradient(circle at top, #020617, #000000);
+}
+
+header, footer {display:none;}
 
 .main-container {
     max-width: 900px;
     margin: auto;
     padding: 40px;
-    background: #020617;
-    border-radius: 18px;
-    border: 2px solid #1e293b;
+    border-radius: 22px;
+    background: linear-gradient(180deg, #020617, #020617);
+    border: 2px solid #22d3ee;
+    box-shadow: 0 0 35px rgba(34,211,238,0.25);
+    text-align: center;
 }
 
-.result-box, .reco-box {
-    margin-top: 25px;
-    padding: 22px;
+h1 {
+    font-size: 38px;
+    font-weight: 800;
+    color: #e5e7eb;
+}
+
+.subtitle {
+    color: #94a3b8;
+    margin-top: -10px;
+}
+
+label p {
+    color: #67e8f9 !important;
+    font-weight: 600 !important;
+}
+
+div.stButton > button {
+    width: 100%;
+    height: 54px;
     border-radius: 14px;
+    font-size: 18px;
+    font-weight: 700;
+    background: linear-gradient(90deg, #06b6d4, #0ea5e9);
+    border: none;
+    color: #020617;
+    transition: 0.3s;
+}
+
+div.stButton > button:hover {
+    box-shadow: 0 0 25px #22d3ee;
+    transform: scale(1.02);
+}
+
+.result-box {
+    margin-top: 30px;
+    padding: 26px;
+    border-radius: 18px;
+    background: linear-gradient(180deg, #022c22, #064e3b);
+    border: 2px solid #10b981;
+    color: #ecfdf5;
+    box-shadow: 0 0 30px rgba(16,185,129,0.6);
+}
+
+.reco-box {
+    margin-top: 20px;
+    padding: 22px;
+    border-radius: 18px;
+    background: #020617;
     border: 2px solid #38bdf8;
     color: #e5e7eb;
 }
@@ -81,7 +135,7 @@ header, footer { display: none; }
 """, unsafe_allow_html=True)
 
 # -----------------------------
-# LOAD MODEL
+# LOAD MODEL (NO CHANGE)
 # -----------------------------
 @st.cache_resource
 def load_files():
@@ -97,8 +151,8 @@ locations = list(encoder.classes_)
 # -----------------------------
 st.markdown("""
 <div class="main-container">
-<h1>House Price Prediction</h1>
-<p>AI Powered Valuation & Recommendation System</p>
+    <h1>🏠 House Price Prediction</h1>
+    <p class="subtitle">AI Powered Valuation & Smart Recommendation</p>
 </div>
 """, unsafe_allow_html=True)
 
