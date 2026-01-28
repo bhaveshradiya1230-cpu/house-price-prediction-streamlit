@@ -154,7 +154,7 @@ st.markdown("""
 <div class="main-container">
     <h1>House Price Prediction</h1>
     <div class="subtitle">AI Powered Valuation & Recommendation System</div>
-    <div class="form-container">
+    
 """, unsafe_allow_html=True)
 
 c1, c2 = st.columns(2)
@@ -199,3 +199,4 @@ if predict:
 
 st.markdown("<div class='footer-text'>Client Demo • Internship • Placement Ready</div>", unsafe_allow_html=True)
 st.markdown("</div>", unsafe_allow_html=True)
+
