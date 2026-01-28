@@ -252,8 +252,9 @@ if predict:
         <div class="progress"><span style="width:{confidence}%"></span></div>
         <p style="font-size:13px;margin-top:6px;">Confidence Score: {confidence}%</p>
 
-        💡 {advice} <br>
-        {space_tip} <br>
-        <b>Expected Range:</b> {format_inr(low)} - {format_inr(high)}
+        💡 {advice} 
+        {space_tip} 
+        Expected Range: {format_inr(low)} - {format_inr(high)}
     </div>
     """, unsafe_allow_html=True)
+
