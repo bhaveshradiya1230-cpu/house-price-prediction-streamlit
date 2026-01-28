@@ -171,12 +171,12 @@ locations = list(encoder.classes_)
 # -----------------------------
 # UI
 # -----------------------------
+st.markdown(f""<div class='form-container'>
+
+<h1>🏠 House Price Prediction</h1>, unsafe_allow_html=True)
+<div class='subtitle'>AI Powered Valuation & Recommendation System</div>""", unsafe_allow_html=True)
 
 
-st.markdown("<h1>🏠 House Price Prediction</h1>", unsafe_allow_html=True)
-st.markdown("<div class='subtitle'>AI Powered Valuation & Recommendation System</div>", unsafe_allow_html=True)
-
-st.markdown("<div class='form-container'>", unsafe_allow_html=True)
 
 c1, c2 = st.columns(2)
 with c1:
@@ -218,4 +218,5 @@ if predict:
 
 st.markdown("<div class='footer-text'>Client Demo • Internship • Placement Ready 💼</div>", unsafe_allow_html=True)
 st.markdown("</div>", unsafe_allow_html=True)
+
 
